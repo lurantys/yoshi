@@ -73,3 +73,21 @@ For detailed instructions on setting up Spotify authentication, see [SPOTIFY_SET
 ## License
 
 This project is licensed under the MIT License.
+
+## Backend API for Playlist Generation
+
+1. Create a `.env` file in your project root and add:
+   ```
+   OPENROUTER_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   ```
+2. Install backend dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the backend server:
+   ```bash
+   node server.js
+   ```
+   The server will run on port 5000 by default.
+
+4. The frontend can POST to `http://localhost:5000/api/generate-playlist` with `{ gptPrompt: "..." }` to get playlist results from OpenRouter.
