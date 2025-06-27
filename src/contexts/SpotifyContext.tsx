@@ -18,7 +18,7 @@ const spotifyApi = new SpotifyWebApi();
 
 // Spotify App Configuration
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID || 'your-client-id-here';
-const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'http://127.0.0.1:3000/callback';
+const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI || 'https://yoshi-red.vercel.app/callback';
 const SCOPES = [
   'user-read-private',
   'user-read-email',

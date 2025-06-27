@@ -10,8 +10,8 @@ To use Spotify authentication in this app, you need to set up a Spotify applicat
 4. Fill in the app details:
    - App name: "Yoshi" (or any name you prefer)
    - App description: "AI-powered playlist generator"
-   - Redirect URI: `http://localhost:3000/callback`
-   - Website: `http://localhost:3000`
+   - Redirect URI: `https://yoshi-red.vercel.app/callback`
+   - Website: `https://yoshi-red.vercel.app`
 5. Accept the terms and create the app
 
 ## Step 2: Configure Environment Variables
@@ -20,7 +20,7 @@ Create a `.env` file in the root directory with the following variables:
 
 ```env
 REACT_APP_SPOTIFY_CLIENT_ID=your_spotify_client_id_here
-REACT_APP_REDIRECT_URI=http://localhost:3000/callback
+REACT_APP_REDIRECT_URI=https://yoshi-red.vercel.app/callback
 ```
 
 Replace `your_spotify_client_id_here` with the Client ID from your Spotify app dashboard.
@@ -28,8 +28,7 @@ Replace `your_spotify_client_id_here` with the Client ID from your Spotify app d
 ## Step 3: Update Redirect URIs
 
 In your Spotify app dashboard, make sure to add these redirect URIs:
-- `http://localhost:3000/callback` (for development)
-- `https://yourdomain.com/callback` (for production)
+- `https://yoshi-red.vercel.app/callback` (for production)
 
 ## Step 4: Start the Application
 
