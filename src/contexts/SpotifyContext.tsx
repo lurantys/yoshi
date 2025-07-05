@@ -69,7 +69,13 @@ export const SpotifyProvider: React.FC<{ children: ReactNode }> = ({ children })
       localStorage.removeItem('spotify_access_token');
       setIsAuthenticated(false);
       setUser(null);
-      setError('Session expired or invalid. Please log in again.');
+      
+      // Check if it's a 403 error (access denied)
+      if (error instanceof Error && error.message.includes('403')) {
+        setError('Access denied. You may not have permission to use this app. Please contact the app developer to be added as a tester.');
+      } else {
+        setError('Session expired or invalid. Please log in again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -112,12 +118,18 @@ export const SpotifyProvider: React.FC<{ children: ReactNode }> = ({ children })
         await checkTokenValidity();
         window.location.replace('/');
       } else {
-        setError(data.error_description || 'Token exchange failed. Please try again.');
+        const errorMsg = data.error_description || data.error || 'Token exchange failed. Please try again.';
+        setError(errorMsg);
         console.error('Spotify token error response:', JSON.stringify(data, null, 2));
         throw new Error('No access token in response');
       }
     } catch (error) {
-      setError('Token exchange failed. Please try again.');
+      console.error('Token exchange error:', error);
+      if (error instanceof Error && error.message.includes('403')) {
+        setError('Access denied. You may not have permission to use this app. Please contact the app developer to be added as a tester.');
+      } else {
+        setError('Token exchange failed. Please try again.');
+      }
       setLoading(false);
     }
   }, [checkTokenValidity]);

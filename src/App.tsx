@@ -519,11 +519,10 @@ Return exactly ${playlistSize} songs if possible.
       transform: scale(1) translateY(0);
     }
     .ai-modal-close-btn {
-      transition: background 0.2s, transform 0.2s;
+      transition: all 0.2s ease;
     }
     .ai-modal-close-btn:hover {
-      background: #16a34a !important;
-      transform: scale(1.07);
+      transform: scale(1.05);
     }
   `;
 
@@ -533,72 +532,22 @@ Return exactly ${playlistSize} songs if possible.
     return (
       <>
         <style>{modalStyles}</style>
-        <div className={`ai-modal-overlay${showModal ? ' ai-modal-open' : ''}`}
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            background: 'rgba(0,0,0,0.4)',
-            zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
+        <div className={`ai-modal-overlay${showModal ? ' ai-modal-open' : ''} fixed inset-0 bg-black/40 dark:bg-black/60 z-50 flex items-center justify-center`}
         >
-          <div className={`ai-modal-popup${showModal ? ' ai-modal-open' : ''}`}
-            style={{
-              background: 'white',
-              borderRadius: 16,
-              width: 340,
-              height: 340,
-              boxShadow: '0 4px 32px rgba(0,0,0,0.2)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 0,
-              position: 'relative',
-            }}
+          <div className={`ai-modal-popup${showModal ? ' ai-modal-open' : ''} bg-white dark:bg-zinc-900 text-black dark:text-white rounded-2xl w-[340px] h-[340px] shadow-2xl flex flex-col items-center justify-center p-0 relative`}
           >
             {modalState === 'loading' && (
-              <div style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <img src="/loading.gif" alt="Loading..." style={{ display: 'block', marginBottom: 16, maxWidth: '100%', maxHeight: 120 }} />
-                <div style={{ fontWeight: 600, fontSize: 20, textAlign: 'center' }}>Generating your playlist...</div>
+              <div className="w-full h-full flex flex-col items-center justify-center">
+                <img src="/loading.gif" alt="Loading..." className="block mb-4 max-w-full max-h-[120px]" />
+                <div className="font-semibold text-xl text-center">Generating your playlist...</div>
               </div>
             )}
             {modalState === 'done' && (
-              <div style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <img src="/done.gif" alt="Done!" style={{ display: 'block', marginBottom: 16, maxWidth: '100%', maxHeight: 120 }} />
-                <div style={{ fontWeight: 600, fontSize: 20, marginBottom: 8, textAlign: 'center' }}>Playlist created!</div>
+              <div className="w-full h-full flex flex-col items-center justify-center">
+                <img src="/done.gif" alt="Done!" className="block mb-4 max-w-full max-h-[120px]" />
+                <div className="font-semibold text-xl mb-2 text-center">Playlist created!</div>
                 <button
-                  className="ai-modal-close-btn"
-                  style={{
-                    marginTop: 8,
-                    padding: '8px 20px',
-                    borderRadius: 8,
-                    background: '#22c55e',
-                    color: 'white',
-                    fontWeight: 600,
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: 16,
-                  }}
+                  className="ai-modal-close-btn mt-2 px-5 py-2 rounded-lg bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold border-none cursor-pointer text-base transition-all duration-200"
                   onClick={() => { setShowModal(false); setModalState(null); }}
                 >Close</button>
               </div>
